@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-abstract class Empleado 
+class Empleado 
 {
     protected $nombre;
     protected $apellido;
@@ -24,7 +24,16 @@ abstract class Empleado
         else {
             $this->nombre = $nombre;
             $this->apellido = $apellido;
-            $this->dni = $dni;
+            
+            if (is_numeric($dni) and $dni>0)
+            {
+                $this->dni = $dni;   
+            }
+            else
+            {
+                throw new \Exception();
+            }
+            
             $this->salario = $salario;
             $this->sector = $sector;
         }
