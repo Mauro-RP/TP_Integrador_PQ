@@ -42,6 +42,38 @@ class EmpleadoTest extends \PHPUnit\Framework\TestCase
 		$this->expectException(\Exception::class);
 		$e = $this->crear("Nicolas","Prieto","",60000,'p');
 	}
+
+	public function testSalarioDelEmpleado()
+	{
+		$e = $this->crear("Nicolas","Prieto",36444555,60000);
+		$this->assertEquals(60000,$e->getSalario());
+	}
+
+	public function testNoSePuedeConstruirConSalarioVacio()
+	{
+		$this->expectException(\Exception::class);
+		$e = $this->crear("Nicolas","Prieto",36555666,"",'p');
+	}
+
+	public function testGetYSetSectorDelEmpleado()
+	{
+		$e = $this->crear("Nicolas","Prieto",36207505,60000); //'p' de Permanente
+		$e -> setSector('e');
+		$this->assertEquals('e',$e->getSector());
+	}
+
+	public function test__toString()
+	{
+		$e = $this->crear("Nicolas","Prieto",36207505,60000);
+		$this->assertEquals("Nicolas Prieto 36207505 60000",$e->__toString());
+	}
+
+	public function testSiNoSeEspecificaElSector()
+	{
+		$d = $this->crear("Nicolas","Prieto",36207505,60000); //'p' de Permanente
+		$this->assertEquals("No especificado",$d->getSector());
+	}
+
 }
 
 ?>
